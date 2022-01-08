@@ -1,0 +1,23 @@
+1. creeps have a ticksToLive prop. We can take advantage of these in a few ways
+    a. check to see if the creep has enough ticks left to live and complete its
+        current task. If not make it suicide. Check this every time it needs
+        to go back to get energy to make sure we dont waste energy
+    
+    b. Have the spawner check each creep to see how long it has to live, when
+        one is about to die start spawning another creep to replace it.
+
+2. in order to find the source with the shortest path between the object we are
+    transporting energy to and an energy source we will need to use the
+    findPathTo function: https://docs.screeps.com/api/#RoomPosition.findPathTo
+    this function will return an array with the shortest path from one object
+    to another. We need to computer the distance between every point and sum 
+    them to find the total length of a path to determine the shortest path to
+    an energy source.
+
+3. We need to do some load balancing between energy sources, it looks like
+    only maybe 2 creeps can harvest at a time? Need to do more research
+    there should be 1 harvester per energy source thats not a container,
+    it should drop the energy directly into a container where other creeps
+    can the grab energy  from the bucket. We want the harvesters/miners to be
+    able to have a ton of work parts. Shouldnt need many move parts since once
+    the get to their destination they should basicallynever move.
